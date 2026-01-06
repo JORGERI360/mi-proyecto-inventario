@@ -1,0 +1,340 @@
+# 📚 Sistema de Inventario de Mobiliario - Biblioteca Universitaria
+
+## 🎯 Descripción del Proyecto
+
+Sistema web completo para gestionar el inventario de mobiliario de una biblioteca universitaria. Incluye autenticación con roles, CRUD completo, búsqueda, filtros y exportación a PDF/Excel.
+
+---
+
+## 🚀 Tecnologías Utilizadas
+
+### Backend
+- **Python 3.11**
+- **FastAPI** - Framework web moderno y rápido
+- **MongoDB** - Base de datos NoSQL
+- **JWT** - Autenticación con tokens
+- **Bcrypt** - Encriptación de contraseñas
+
+### Frontend
+- **React 19** - Biblioteca de JavaScript para interfaces
+- **Axios** - Cliente HTTP
+- **Tailwind CSS** - Framework de estilos
+- **jsPDF** - Generación de PDFs
+- **XLSX** - Generación de archivos Excel
+
+---
+
+## 📋 Características del Sistema
+
+### ✅ Autenticación y Roles
+- **Administrador**: Acceso completo (agregar, editar, eliminar, ver, exportar)
+- **Jefa de Departamento**: Ver todo y exportar reportes
+- **Auxiliar**: Solo ver inventario y exportar reportes
+
+### ✅ Gestión de Mobiliario
+- Registro completo con 8 campos:
+  - Código/ID único
+  - Nombre
+  - Tipo (16 tipos predefinidos)
+  - Cantidad
+  - Ubicación (Planta 1 o Planta 2)
+  - Estado (Bueno, Regular, Dañado)
+  - Descripción
+  - Historial de mantenimiento
+
+### ✅ Funcionalidades
+- ➕ Agregar mobiliario (solo Administrador)
+- ✏️ Editar mobiliario (solo Administrador)
+- 🗑️ Eliminar mobiliario (solo Administrador)
+- 🔍 Búsqueda por nombre, código o descripción
+- 🎯 Filtros por tipo, ubicación y estado
+- 👁️ Ver detalles completos
+- 📄 Exportar a PDF
+- 📊 Exportar a Excel
+
+### ✅ Tipos de Mobiliario
+1. Mesas blancas
+2. Mesas cafés
+3. Sillas altas
+4. Sillas de colores
+5. Sillas naranjas
+6. Sillas negras
+7. Sillas afelpadas
+8. Botes de basura
+9. Aire acondicionado
+10. Cortinas largas
+11. Estantes azules
+12. Estantes grises
+13. Computadoras
+14. Pantallas 30 pulgadas
+15. Extintores
+16. Mesas de cubículos
+
+---
+
+## 👥 Usuarios del Sistema
+
+| Usuario | Contraseña | Rol | Permisos |
+|---------|-----------|-----|----------|
+| `admin` | `admin123` | Administrador | Acceso total (CRUD completo) |
+| `jefa` | `jefa123` | Jefa de Departamento | Ver y exportar |
+| `auxiliar` | `auxiliar123` | Auxiliar | Ver y exportar |
+
+---
+
+## 💻 Cómo Usar en Visual Studio Code
+
+### Paso 1: Abrir el Proyecto
+1. Abre **Visual Studio Code**
+2. Ve a `Archivo` → `Abrir Carpeta`
+3. Selecciona la carpeta donde copiaste el proyecto
+
+### Paso 2: Estructura de Archivos
+```
+/app/
+├── backend/
+│   ├── server.py           ← Código del servidor (Backend)
+│   ├── requirements.txt    ← Dependencias de Python
+│   └── .env               ← Variables de entorno
+├── frontend/
+│   ├── src/
+│   │   ├── App.js         ← Código principal (Frontend)
+│   │   └── App.css        ← Estilos
+│   ├── package.json       ← Dependencias de Node.js
+│   └── .env               ← Variables de entorno del frontend
+└── INSTRUCCIONES_USO.md   ← Este archivo
+```
+
+### Paso 3: Archivos Importantes para Revisar
+
+#### 📄 Backend: `/app/backend/server.py`
+Este archivo contiene:
+- Modelos de datos (User, Mobiliario)
+- Rutas API (login, CRUD de mobiliario)
+- Lógica de autenticación
+- Conexión a base de datos
+
+#### 📄 Frontend: `/app/frontend/src/App.js`
+Este archivo contiene:
+- Interfaz de usuario completa
+- Login y logout
+- Formularios de agregar/editar
+- Tabla de mobiliario
+- Filtros y búsqueda
+- Exportación PDF/Excel
+
+---
+
+## 🌐 Cómo Acceder al Sistema
+
+### Opción 1: Desde tu navegador web
+1. La aplicación ya está corriendo en: **https://espanol-convo-19.preview.emergentagent.com**
+2. Abre esa URL en tu navegador
+3. Inicia sesión con cualquiera de los usuarios mencionados arriba
+
+### Opción 2: Ejecutar localmente (si copias el código)
+
+#### Requisitos:
+- Python 3.11+
+- Node.js 16+
+- MongoDB
+
+#### Backend:
+```bash
+cd /app/backend
+pip install -r requirements.txt
+uvicorn server:app --reload --host 0.0.0.0 --port 8001
+```
+
+#### Frontend:
+```bash
+cd /app/frontend
+yarn install
+yarn start
+```
+
+---
+
+## 📱 Guía de Uso del Sistema
+
+### 1️⃣ Iniciar Sesión
+1. Abre la aplicación en tu navegador
+2. Ingresa usuario y contraseña
+3. Haz clic en "Iniciar Sesión"
+
+### 2️⃣ Ver Inventario
+- La tabla principal muestra todo el mobiliario
+- Puedes ver: código, nombre, tipo, cantidad, ubicación y estado
+
+### 3️⃣ Buscar y Filtrar
+1. **Búsqueda libre**: Escribe en el campo "Buscar" (busca en nombre, código o descripción)
+2. **Filtro por Tipo**: Selecciona el tipo de mobiliario
+3. **Filtro por Ubicación**: Planta 1 o Planta 2
+4. **Filtro por Estado**: Bueno, Regular o Dañado
+5. Haz clic en "Aplicar Filtros"
+
+### 4️⃣ Agregar Mobiliario (Solo Administrador)
+1. Haz clic en "➕ Agregar Mobiliario"
+2. Llena todos los campos requeridos (*)
+3. Haz clic en "Guardar"
+
+### 5️⃣ Editar Mobiliario (Solo Administrador)
+1. En la fila del mobiliario, haz clic en "✏️ Editar"
+2. Modifica los campos necesarios
+3. Haz clic en "Actualizar"
+
+### 6️⃣ Eliminar Mobiliario (Solo Administrador)
+1. En la fila del mobiliario, haz clic en "🗑️ Eliminar"
+2. Confirma la eliminación
+
+### 7️⃣ Ver Detalles
+- Haz clic en "👁️ Ver" para ver toda la información incluyendo descripción e historial
+
+### 8️⃣ Exportar Reportes (Todos los usuarios)
+- **📄 Exportar PDF**: Genera un reporte en PDF con tabla del inventario
+- **📊 Exportar Excel**: Genera un archivo Excel con todos los datos
+
+---
+
+## 🔧 Base de Datos
+
+### Estructura de MongoDB
+
+**Colección: `users`**
+- id: UUID único
+- username: Nombre de usuario
+- password_hash: Contraseña encriptada
+- role: Rol del usuario (administrador, jefa_departamento, auxiliar)
+- nombre_completo: Nombre completo
+
+**Colección: `mobiliario`**
+- id: UUID único
+- nombre: Nombre del mobiliario
+- tipo: Tipo de mobiliario
+- cantidad: Número entero
+- ubicacion: Planta 1 o Planta 2
+- estado: Bueno, Regular o Dañado
+- codigo: Código único identificador
+- historial_mantenimiento: Texto largo
+- descripcion: Texto
+- fecha_registro: Fecha y hora de registro
+
+---
+
+## 📊 API Endpoints
+
+### Autenticación
+- `POST /api/login` - Iniciar sesión
+- `GET /api/me` - Obtener usuario actual
+
+### Mobiliario
+- `GET /api/mobiliario` - Listar todo (con filtros opcionales)
+- `GET /api/mobiliario/{id}` - Obtener uno específico
+- `POST /api/mobiliario` - Crear nuevo (Admin)
+- `PUT /api/mobiliario/{id}` - Actualizar (Admin)
+- `DELETE /api/mobiliario/{id}` - Eliminar (Admin)
+- `GET /api/mobiliario/export/data` - Datos para exportar
+
+### Catálogos
+- `GET /api/tipos-mobiliario` - Lista de tipos disponibles
+
+---
+
+## 🎨 Personalización
+
+### Cambiar colores o estilos
+Edita `/app/frontend/src/App.js` y `/app/frontend/src/App.css`
+- Los colores usan clases de Tailwind CSS
+- Puedes cambiar: `bg-blue-600`, `text-red-500`, etc.
+
+### Agregar más tipos de mobiliario
+Edita `/app/backend/server.py`, busca la función `get_tipos_mobiliario()` y agrega más tipos a la lista.
+
+### Cambiar usuarios por defecto
+Edita `/app/backend/server.py`, busca la función `init_database()` y modifica los usuarios.
+
+---
+
+## 🐛 Solución de Problemas
+
+### Problema: No puedo iniciar sesión
+**Solución**: Verifica que estés usando las credenciales correctas (ver tabla de usuarios arriba)
+
+### Problema: No puedo agregar/editar/eliminar
+**Solución**: Solo el usuario **admin** tiene estos permisos. Los otros usuarios solo pueden ver y exportar.
+
+### Problema: Los filtros no funcionan
+**Solución**: Después de seleccionar los filtros, haz clic en "Aplicar Filtros"
+
+### Problema: Error al exportar PDF/Excel
+**Solución**: Asegúrate de que tu navegador permita descargas automáticas
+
+---
+
+## 📝 Notas para la Entrega del Proyecto
+
+### Lo que debes entregar:
+1. **Código fuente**: Carpeta `/app` completa
+2. **Este documento**: `INSTRUCCIONES_USO.md`
+3. **Capturas de pantalla**:
+   - Pantalla de login
+   - Dashboard principal
+   - Formulario de agregar mobiliario
+   - Tabla con datos
+   - Ejemplo de PDF exportado
+
+### Lo que puedes explicar en tu presentación:
+1. **Problema resuelto**: Sistema para inventario de biblioteca
+2. **Tecnologías usadas**: Python, FastAPI, React, MongoDB
+3. **Características principales**: 
+   - Login con 3 roles diferentes
+   - CRUD completo
+   - Búsqueda y filtros
+   - Exportación a PDF y Excel
+4. **Base de datos**: Estructura de MongoDB con 2 colecciones
+5. **Seguridad**: Contraseñas encriptadas con bcrypt, autenticación con JWT
+
+---
+
+## ✅ Checklist de Funcionalidades
+
+- ✅ Login con autenticación
+- ✅ 3 roles de usuario con permisos diferentes
+- ✅ Agregar mobiliario (con validación de código único)
+- ✅ Editar mobiliario
+- ✅ Eliminar mobiliario (con confirmación)
+- ✅ Ver lista completa de mobiliario
+- ✅ Ver detalles individuales
+- ✅ Búsqueda por texto libre
+- ✅ Filtro por tipo de mobiliario
+- ✅ Filtro por ubicación (Planta 1/2)
+- ✅ Filtro por estado (Bueno/Regular/Dañado)
+- ✅ Exportar reporte a PDF
+- ✅ Exportar reporte a Excel
+- ✅ 16 tipos de mobiliario predefinidos
+- ✅ 8 campos completos por cada mobiliario
+- ✅ Interfaz responsiva y moderna
+- ✅ Base de datos MongoDB
+- ✅ API REST con FastAPI
+
+---
+
+## 📞 Soporte
+
+Si tienes algún problema con el código:
+1. Revisa los logs en las consolas de Visual Studio Code
+2. Verifica que MongoDB esté corriendo
+3. Asegúrate de que los puertos 8001 (backend) y 3000 (frontend) estén disponibles
+
+---
+
+## 🎓 Créditos
+
+- **Proyecto**: Sistema de Inventario de Mobiliario
+- **Para**: Proyecto de Universidad
+- **Tecnologías**: Python, FastAPI, React, MongoDB, Tailwind CSS
+- **Año**: 2025
+
+---
+
+¡Mucho éxito con tu proyecto! 🚀

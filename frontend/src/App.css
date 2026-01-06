@@ -1,0 +1,263 @@
+/* ===============================
+   RESET BÁSICO
+================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f6f9;
+  color: #1f2937;
+}
+
+/* ===============================
+   LOGIN PREMIUM
+================================ */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+}
+
+.login-card {
+  background: white;
+  width: 380px;
+  padding: 35px;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+.login-card h1 {
+  margin-bottom: 5px;
+  color: #1e3a8a;
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 25px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+
+.login-form label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.login-form input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.btn-login {
+  margin-top: 10px;
+  padding: 12px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.login-footer {
+  display: block;
+  margin-top: 18px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* ===============================
+   LAYOUT PRINCIPAL
+================================ */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: #1f2937;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+}
+
+.role {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* ===============================
+   CONTENIDO
+================================ */
+.content {
+  flex: 1;
+  padding: 25px 35px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+/* ===============================
+   FILTRO (MEJORADO)
+================================ */
+.filter-panel {
+  background: white;
+  padding: 20px 22px;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+.filter-panel input,
+.filter-panel select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.filter-panel button {
+  height: 42px;
+}
+
+/* ===============================
+   ACCIONES (MEJOR ESPACIADO)
+================================ */
+.actions {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.actions .btn {
+  padding: 10px 16px;
+  font-size: 14px;
+}
+
+/* ===============================
+   BOTONES
+================================ */
+.btn {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #e5e7eb;
+}
+
+.btn.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.btn.success {
+  background: #16a34a;
+  color: white;
+}
+
+.btn.danger {
+  background: #dc2626;
+  color: white;
+}
+
+.btn.pdf {
+  background: #b91c1c;
+  color: white;
+}
+
+.btn.excel {
+  background: #15803d;
+  color: white;
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+/* ===============================
+   TABLA
+================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+th, td {
+  padding: 14px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+th {
+  background: #f3f4f6;
+  font-size: 14px;
+}
+
+/* ===============================
+   MODAL PROFESIONAL
+================================ */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  width: 520px;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.modal-box h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.modal-box input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 15px;
+}
