@@ -2,6 +2,11 @@
   "name": "inventario-biblioteca",
   "version": "1.0.0",
   "private": true,
+  "description": "Sistema de inventario para la biblioteca del ITT",
+  "author": "Richi",
+  "homepage": "./",
+  "main": "public/electron.js",
+
   "dependencies": {
     "axios": "^1.8.4",
     "file-saver": "^2.0.5",
@@ -12,16 +17,39 @@
     "react-scripts": "5.0.1",
     "xlsx": "^0.18.5"
   },
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "electron": "electron .",
+    "dist": "npm run build && electron-builder"
   },
+
   "devDependencies": {
+    "electron": "^39.2.7",
+    "electron-builder": "^26.4.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17"
   },
+
+  "build": {
+    "appId": "com.itt.inventario",
+    "productName": "Inventario Biblioteca ITT",
+    "files": [
+      "build/**/*",
+      "public/electron.js",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    }
+  },
+
   "browserslist": {
     "production": [
       ">0.2%",

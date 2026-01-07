@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import jsPDF from "jspdf";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
@@ -14,6 +14,9 @@ const USERS = [
 ];
 
 function App() {
+  /* ===============================
+     ESTADOS
+  ================================ */
   const [user, setUser] = useState(null);
   const [login, setLogin] = useState({ username: "", password: "" });
 
@@ -31,6 +34,31 @@ function App() {
   });
 
   /* ===============================
+     LOCALSTORAGE - CARGA INICIAL
+  ================================ */
+  useEffect(() => {
+    const storedItems = localStorage.getItem("inventario_items");
+    const storedUser = localStorage.getItem("inventario_user");
+
+    if (storedItems) {
+      const parsedItems = JSON.parse(storedItems);
+      setItems(parsedItems);
+      setFilteredItems(parsedItems);
+    }
+
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  /* ===============================
+     LOCALSTORAGE - GUARDAR INVENTARIO
+  ================================ */
+  useEffect(() => {
+    localStorage.setItem("inventario_items", JSON.stringify(items));
+  }, [items]);
+
+  /* ===============================
      LOGIN
   ================================ */
   const handleLogin = () => {
@@ -39,11 +67,19 @@ function App() {
         u.username === login.username &&
         u.password === login.password
     );
+
     if (!found) {
       alert("Credenciales incorrectas");
       return;
     }
+
     setUser(found);
+    localStorage.setItem("inventario_user", JSON.stringify(found));
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("inventario_user");
   };
 
   /* ===============================
@@ -175,10 +211,7 @@ function App() {
               }
             />
 
-            <button
-              className="btn-login"
-              onClick={handleLogin}
-            >
+            <button className="btn-login" onClick={handleLogin}>
               Iniciar sesión
             </button>
           </div>
@@ -204,10 +237,7 @@ function App() {
       <main className="content">
         <header className="topbar">
           <h2>Gestión de Mobiliario</h2>
-          <button
-            className="btn danger"
-            onClick={() => setUser(null)}
-          >
+          <button className="btn danger" onClick={logout}>
             Salir
           </button>
         </header>
@@ -218,20 +248,14 @@ function App() {
             placeholder="Buscar por nombre, código o descripción"
             value={filters.search}
             onChange={(e) =>
-              setFilters({
-                ...filters,
-                search: e.target.value,
-              })
+              setFilters({ ...filters, search: e.target.value })
             }
           />
 
           <select
             value={filters.ubicacion}
             onChange={(e) =>
-              setFilters({
-                ...filters,
-                ubicacion: e.target.value,
-              })
+              setFilters({ ...filters, ubicacion: e.target.value })
             }
           >
             <option value="">Ubicación</option>
@@ -243,10 +267,7 @@ function App() {
           <select
             value={filters.estado}
             onChange={(e) =>
-              setFilters({
-                ...filters,
-                estado: e.target.value,
-              })
+              setFilters({ ...filters, estado: e.target.value })
             }
           >
             <option value="">Estado</option>
@@ -276,10 +297,7 @@ function App() {
           <button className="btn pdf" onClick={exportPDF}>
             PDF
           </button>
-          <button
-            className="btn excel"
-            onClick={exportExcel}
-          >
+          <button className="btn excel" onClick={exportExcel}>
             Excel
           </button>
         </div>
@@ -293,9 +311,7 @@ function App() {
               <th>Ubicación</th>
               <th>Estado</th>
               <th>Cantidad</th>
-              {user.role !== "auxiliar" && (
-                <th>Acciones</th>
-              )}
+              {user.role !== "auxiliar" && <th>Acciones</th>}
             </tr>
           </thead>
           <tbody>
@@ -319,9 +335,7 @@ function App() {
                     </button>
                     <button
                       className="btn small danger"
-                      onClick={() =>
-                        handleDelete(i.id)
-                      }
+                      onClick={() => handleDelete(i.id)}
                     >
                       Eliminar
                     </button>
@@ -363,68 +377,23 @@ function Modal({ onSave, onClose, item }) {
   return (
     <div className="modal">
       <div className="modal-box">
-        <h3>
-          {item ? "Editar" : "Agregar"} Mobiliario
-        </h3>
+        <h3>{item ? "Editar" : "Agregar"} Mobiliario</h3>
 
-        <input
-          placeholder="Nombre"
-          value={data.nombre}
-          onChange={(e) =>
-            setData({ ...data, nombre: e.target.value })
-          }
-        />
-        <input
-          placeholder="Código"
-          value={data.codigo}
-          onChange={(e) =>
-            setData({ ...data, codigo: e.target.value })
-          }
-        />
-        <input
-          placeholder="Descripción"
-          value={data.descripcion}
-          onChange={(e) =>
-            setData({
-              ...data,
-              descripcion: e.target.value,
-            })
-          }
-        />
-        <input
-          placeholder="Ubicación"
-          value={data.ubicacion}
-          onChange={(e) =>
-            setData({
-              ...data,
-              ubicacion: e.target.value,
-            })
-          }
-        />
-        <input
-          placeholder="Estado"
-          value={data.estado}
-          onChange={(e) =>
-            setData({ ...data, estado: e.target.value })
-          }
-        />
-        <input
-          type="number"
-          placeholder="Cantidad"
-          value={data.cantidad}
-          onChange={(e) =>
-            setData({
-              ...data,
-              cantidad: e.target.value,
-            })
-          }
-        />
+        <input placeholder="Nombre" value={data.nombre}
+          onChange={(e) => setData({ ...data, nombre: e.target.value })} />
+        <input placeholder="Código" value={data.codigo}
+          onChange={(e) => setData({ ...data, codigo: e.target.value })} />
+        <input placeholder="Descripción" value={data.descripcion}
+          onChange={(e) => setData({ ...data, descripcion: e.target.value })} />
+        <input placeholder="Ubicación" value={data.ubicacion}
+          onChange={(e) => setData({ ...data, ubicacion: e.target.value })} />
+        <input placeholder="Estado" value={data.estado}
+          onChange={(e) => setData({ ...data, estado: e.target.value })} />
+        <input type="number" placeholder="Cantidad" value={data.cantidad}
+          onChange={(e) => setData({ ...data, cantidad: e.target.value })} />
 
         <div className="modal-actions">
-          <button
-            className="btn success"
-            onClick={() => onSave(data)}
-          >
+          <button className="btn success" onClick={() => onSave(data)}>
             Guardar
           </button>
           <button className="btn" onClick={onClose}>
@@ -437,4 +406,3 @@ function Modal({ onSave, onClose, item }) {
 }
 
 export default App;
-
